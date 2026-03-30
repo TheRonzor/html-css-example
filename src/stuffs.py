@@ -1,5 +1,3 @@
-# AI slop
-
 import math
 import cmath
 
@@ -19,24 +17,16 @@ def write_apollonian_gasket_svg(
         b, z = circle
         return (z.real, z.imag, abs(1.0 / b))
 
-    def descartes_solutions(c1, c2, c3):
+    def other_descartes_circle(c1, c2, c3, c4):
         b1, z1 = c1
         b2, z2 = c2
         b3, z3 = c3
+        b4, z4 = c4
 
-        sum_b = b1 + b2 + b3
-        prod_b = 2 * cmath.sqrt(b1 * b2 + b2 * b3 + b3 * b1)
-
-        bz_sum = b1 * z1 + b2 * z2 + b3 * z3
-        bz_prod = 2 * cmath.sqrt(
-            b1 * b2 * z1 * z2 +
-            b2 * b3 * z2 * z3 +
-            b3 * b1 * z3 * z1
-        )
-
-        c4a = (sum_b + prod_b, (bz_sum + bz_prod) / (sum_b + prod_b))
-        c4b = (sum_b - prod_b, (bz_sum - bz_prod) / (sum_b - prod_b))
-        return c4a, c4b
+        b_new = 2 * (b1 + b2 + b3) - b4
+        bz_new = 2 * (b1 * z1 + b2 * z2 + b3 * z3) - b4 * z4
+        z_new = bz_new / b_new
+        return (b_new, z_new)
 
     def same_circle(ca, cb, tol=1e-8):
         ba, za = ca
@@ -88,8 +78,7 @@ def write_apollonian_gasket_svg(
         if depth <= 0:
             return
 
-        s1, s2 = descartes_solutions(ca, cb, cc)
-        candidate = s1 if not same_circle(s1, known_fourth) else s2
+        candidate = other_descartes_circle(ca, cb, cc, known_fourth)
 
         rad = circle_radius(candidate)
         if rad < min_radius / scale:
