@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Controls Cheat Sheet | RonUsesAI Inc.</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-bar">
+        <a class="brand" href="index.html">RonUsesAI Inc.</a>
+        <nav class="main-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="content.html">Content Example</a>
+          <a href="features.html">Controls Cheat Sheet</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container controls-layout">
+        <article class="content-article">
+          <p class="eyebrow">Interactive Example Page</p>
+          <h1>HTML Controls Cheat Sheet</h1>
+          <p>
+            This page demonstrates common HTML controls such as buttons, text
+            inputs, sliders, checkboxes, radio buttons, dropdowns, and text
+            areas. Each control updates the display.
+          </p>
+
+          <div class="controls-main-row">
+            <section class="card control-section">
+              <h2>Live preview</h2>
+              <div id="preview-card" class="control-preview rounded-shape">
+                <h3 id="preview-title">Hello, human!</h3>
+                <p id="preview-message">
+                  Use the controls below to change this card.
+                </p>
+                <div class="preview-stats">
+                  <span>Clicks: <strong id="click-count">0</strong></span>
+                  <span>Size: <strong id="size-value">140</strong>px</span>
+                  <span
+                    >Choice: <strong id="select-value">Article</strong></span
+                  >
+                </div>
+                <div id="preview-box" class="preview-box"></div>
+              </div>
+            </section>
+
+            <section class="card control-section">
+              <h2>Common controls</h2>
+              <form class="controls-form" onsubmit="return false;">
+                <div class="form-row">
+                  <label for="name-input">Text input</label>
+                  <input
+                    id="name-input"
+                    type="text"
+                    placeholder="Type a name"
+                    value="Your Name"
+                  />
+                </div>
+
+                <div class="form-row">
+                  <label for="message-input">Text area</label>
+                  <textarea id="message-input" rows="3">
+Words and things</textarea
+                  >
+                </div>
+
+                <div class="form-row">
+                  <label for="topic-select">Dropdown menu</label>
+                  <select id="topic-select">
+                    <option>Thing 1</option>
+                    <option>Thing 2</option>
+                    <option>Thing 3</option>
+                  </select>
+                </div>
+
+                <div class="form-row">
+                  <label for="size-slider">Range slider</label>
+                  <input
+                    id="size-slider"
+                    type="range"
+                    min="80"
+                    max="220"
+                    value="140"
+                  />
+                </div>
+
+                <div class="form-row inline-row">
+                  <label for="color-picker">Color picker</label>
+                  <input id="color-picker" type="color" value="#4f7cff" />
+                </div>
+
+                <fieldset class="form-row">
+                  <legend>Radio buttons</legend>
+                  <div class="choice-row">
+                    <label
+                      ><input
+                        type="radio"
+                        name="shape"
+                        value="rounded"
+                        checked
+                      />
+                      Rounded</label
+                    >
+                    <label
+                      ><input type="radio" name="shape" value="square" />
+                      Square</label
+                    >
+                  </div>
+                </fieldset>
+
+                <div class="form-row inline-row">
+                  <label>
+                    <input id="shadow-toggle" type="checkbox" checked />
+                    Show extra highlight
+                  </label>
+                </div>
+
+                <div class="button-row">
+                  <button
+                    id="count-button"
+                    class="button button-primary"
+                    type="button"
+                  >
+                    Click me
+                  </button>
+                  <button
+                    id="reset-button"
+                    class="button button-secondary"
+                    type="button"
+                  >
+                    Reset controls
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
+        </article>
+
+        <aside class="card sidebar">
+          <h2>Why this matters</h2>
+          <p>
+            Many pages need controls for searching, filtering, customizing, or
+            submitting data. This example shows how form elements can connect to
+            HTML, CSS, and JavaScript.
+          </p>
+          <ul>
+            <li><strong>HTML</strong> creates the controls.</li>
+            <li><strong>CSS</strong> styles the page.</li>
+            <li>
+              <strong>JavaScript</strong> updates the display when inputs
+              change.
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <p>&copy; 2026 RonUsesAI Inc.</p>
+        <p><a href="content.html">Back to content example</a></p>
+      </div>
+    </footer>
+
+    <script>
+      const nameInput = document.getElementById("name-input");
+      const messageInput = document.getElementById("message-input");
+      const topicSelect = document.getElementById("topic-select");
+      const sizeSlider = document.getElementById("size-slider");
+      const colorPicker = document.getElementById("color-picker");
+      const shadowToggle = document.getElementById("shadow-toggle");
+      const countButton = document.getElementById("count-button");
+      const resetButton = document.getElementById("reset-button");
+
+      const previewCard = document.getElementById("preview-card");
+      const previewTitle = document.getElementById("preview-title");
+      const previewMessage = document.getElementById("preview-message");
+      const previewBox = document.getElementById("preview-box");
+      const clickCount = document.getElementById("click-count");
+      const sizeValue = document.getElementById("size-value");
+      const selectValue = document.getElementById("select-value");
+
+      let clicks = 0;
+
+      function updatePreview() {
+        const name = nameInput.value.trim() || "student";
+        const message =
+          messageInput.value.trim() ||
+          "Use the controls below to change this card.";
+        const size = sizeSlider.value;
+        const topic = topicSelect.value;
+        const shape = document.querySelector(
+          'input[name="shape"]:checked',
+        ).value;
+
+        previewTitle.textContent = `Hello, ${name}!`;
+        previewMessage.textContent = message;
+        selectValue.textContent = topic;
+        sizeValue.textContent = size;
+        previewBox.style.width = `${size}px`;
+        previewBox.style.height = `${size}px`;
+        previewBox.style.backgroundColor = colorPicker.value;
+
+        previewCard.classList.toggle("preview-highlight", shadowToggle.checked);
+        previewCard.classList.toggle("rounded-shape", shape === "rounded");
+        previewCard.classList.toggle("square-shape", shape === "square");
+      }
+
+      countButton.addEventListener("click", () => {
+        clicks += 1;
+        clickCount.textContent = clicks;
+        previewTitle.textContent = `Hello, ${nameInput.value.trim() || "student"}!`;
+        // previewMessage.textContent = `You clicked the button ${clicks} time${clicks === 1 ? "" : "s"}.`;
+      });
+
+      resetButton.addEventListener("click", () => {
+        nameInput.value = "student";
+        messageInput.value = "Use the controls below to change this card.";
+        topicSelect.value = "Article";
+        sizeSlider.value = "140";
+        colorPicker.value = "#4f7cff";
+        shadowToggle.checked = true;
+        document.querySelector('input[name="shape"][value="rounded"]').checked =
+          true;
+        clicks = 0;
+        clickCount.textContent = clicks;
+        updatePreview();
+      });
+
+      [
+        nameInput,
+        messageInput,
+        topicSelect,
+        sizeSlider,
+        colorPicker,
+        shadowToggle,
+      ].forEach((control) => {
+        control.addEventListener("input", updatePreview);
+        control.addEventListener("change", updatePreview);
+      });
+
+      document.querySelectorAll('input[name="shape"]').forEach((radio) => {
+        radio.addEventListener("change", updatePreview);
+      });
+
+      updatePreview();
+    </script>
+  </body>
+</html>
