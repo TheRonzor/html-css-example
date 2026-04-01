@@ -6,8 +6,8 @@
   To switch themes, comment out one import and uncomment the other.
 */
 
-@import url("theme_light.css");
-/* @import url("theme_dark.css"); */
+/* @import url("theme_light.css"); */
+@import url("theme_dark.css");
 
 :root {
   --font-stack: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
