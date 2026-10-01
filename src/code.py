@@ -8,6 +8,7 @@ def write_apollonian_gasket_svg(
     height=1200,
     max_depth=6,
     min_radius=2.0,
+    bg_mode ='cool'
 ):
     def circle_radius(circle):
         b, _ = circle
@@ -123,14 +124,24 @@ def write_apollonian_gasket_svg(
     )
     svg.append("<defs>")
 
-    svg.append("""
-    <radialGradient id="bgGradient" cx="35%" cy="30%" r="85%">
-        <stop offset="0%"  stop-color="#1a2a6c"/>
-        <stop offset="45%" stop-color="#6a11cb"/>
-        <stop offset="75%" stop-color="#2575fc"/>
-        <stop offset="100%" stop-color="#0b1020"/>
-    </radialGradient>
-    """)
+    if bg_mode == 'cool':
+        svg.append("""
+        <radialGradient id="bgGradient" cx="35%" cy="30%" r="85%">
+            <stop offset="0%"  stop-color="#1a2a6c"/>
+            <stop offset="45%" stop-color="#6a11cb"/>
+            <stop offset="75%" stop-color="#2575fc"/>
+            <stop offset="100%" stop-color="#0b1020"/>
+        </radialGradient>
+        """)
+    elif bg_mode == 'warm':
+        svg.append("""
+            <radialGradient id="bgGradient" cx="35%" cy="30%" r="85%">
+            <stop offset="0%"   stop-color="#ff512f"/>
+            <stop offset="40%"  stop-color="#dd2476"/>
+            <stop offset="75%"  stop-color="#ff9a44"/>
+            <stop offset="100%" stop-color="#220811"/>
+        </radialGradient>
+        """)
 
     svg.append("""
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
